@@ -24,7 +24,7 @@ object Main extends App {
   //logger.info(s"Stack: ${s}")
 
   val path = WeightedTriangle.findMinPath(s)
-  logger.info(s" Minimal path is ${path.nodes.map(n => n.weight).mkString(" + ")} = ${path.nodes.map(n => n.weight).foldLeft(0)(_ + _)}")
+  logger.info(s" Minimal path is ${path.nodes.map(n => n.weight).mkString(" + ")} = ${path.length}")
 
 
 
