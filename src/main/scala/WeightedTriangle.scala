@@ -18,22 +18,17 @@ object WeightedTriangle {
 
 
 
+  def findMinPath(triangle: List[List[Node]]): Path = {
 
-  def findMinPath(triangle: mutable.Stack[List[Node]]): Path = {
-
-    //initially last row
-    var optimalPath: List[Path] = pruneNodes[Node](triangle.pop(), mergeNodes)
-
-    while(!triangle.isEmpty){
-      val row: List[Node] = triangle.pop()
+    val p: List[Path] = triangle.foldRight(List.fill(triangle.last.size)(Path(0, List())))((row, path) => {
       row.length match {
         case 1 =>
-          optimalPath = optimalPath.map(p => p.addNode(row.head))
+          path.map(p => p.addNode(row.head))
         case _ =>
-          optimalPath = pruneNodes[Path](row.zip(optimalPath).map(p => p._2.addNode(p._1)), mergePaths)
+          pruneNodes[Path](row.zip(path).map(p => p._2.addNode(p._1)), mergePaths)
       }
-    }
-    optimalPath.head
+    })
+    p.head
   }
 
 

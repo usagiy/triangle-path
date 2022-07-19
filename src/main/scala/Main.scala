@@ -13,21 +13,21 @@ object Main extends App {
 
   //logger.info("---------- Min triangle path ------------ ")
 
-  var s = Stack[List[Node]]()
+
+
+  var triangle = List[List[Node]]()
   for (ln <- io.Source.stdin.getLines) {
 
-    val n = ln.split(" ").map(_.trim).toList.map(s => Node(s.toInt))
-    s.push(n)
+    val n: List[Node] = ln.split(" ").map(_.trim).toList.map(s => Node(s.toInt))
+    triangle = triangle :+ n
     //println(ln)
   }
 
-  //logger.info(s"Stack: ${s}")
 
-  val path = WeightedTriangle.findMinPath(s)
+  logger.info(s"Triangle: ${triangle}")
+
+  val path = WeightedTriangle.findMinPath(triangle)
   logger.info(s" Minimal path is ${path.nodes.map(n => n.weight).mkString(" + ")} = ${path.length}")
-
-
-
 
 
 }
